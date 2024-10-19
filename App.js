@@ -9,7 +9,6 @@ import {
   View,
   FlatList,
   StyleSheet,
-  StatusBar,
   Text,
 } from 'react-native';
 
@@ -20,37 +19,37 @@ const DATA = [
   {
     id: '1',
     header: 'JavaScript',
-    text: '3 years of expirience. 10 different projects on Github and one commercial project ljahhf hh hhh hhhhhhhhhhhhhhh hhhhh hhhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhh hhhhh hhhhhhhdddmmdscnlasjbvkaghfahgbSKJVJBPAVFAPENMCM       E RGE GREGA EG     AERG EAGAETHG',
+    text: '3 years of expirience. 10 different projects on Github and one commercial project.',
     image: 'https://img.icons8.com/nolan/64/javascript-logo.png'
   },
   {
     id: '2',
     header: 'Python',
-    text: '3 years of expirience. 10 different projects on Github and one commercial project ljahhf hh hhh hhhhhhhhhhhhhhh hhhhh hhhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhh hhhhh hhhhhhhdddmmdscnlasjbvkaghfahgbSKJVJBPAVFAPENMCM       E RGE GREGA EG     AERG EAGAETHG',
+    text: '1 year of learning. I have two fullstack projects on python.',
     image: 'https://img.icons8.com/nolan/64/python.png'
   },
   {
     id: '3',
     header: 'Java',
-    text: '3 years of expirience. 10 different projects on Github and one commercial project ljahhf hh hhh hhhhhhhhhhhhhhh hhhhh hhhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhh hhhhh hhhhhhhdddmmdscnlasjbvkaghfahgbSKJVJBPAVFAPENMCM       E RGE GREGA EG     AERG EAGAETHG',
+    text: 'I had learned this language during several mounths, but decided that i do not need it in my future, so my study had been finished in sort time',
     image: 'https://img.icons8.com/nolan/64/java-coffee-cup-logo.png'
   },
   {
     id: '4',
     header: 'Kotlin',
-    text: '3 years of expirience. 10 different projects on Github and one commercial project ljahhf hh hhh hhhhhhhhhhhhhhh hhhhh hhhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhh hhhhh hhhhhhhdddmmdscnlasjbvkaghfahgbSKJVJBPAVFAPENMCM       E RGE GREGA EG     AERG EAGAETHG',
+    text: 'I do not have any expirience of working with this language, but i am going to have it in the future.',
     image: 'https://img.icons8.com/nolan/64/kotlin.png'
   },
   {
     id: '5',
     header: 'Visual Basic',
-    text: '3 years of expirience. 10 different projects on Github and one commercial project ljahhf hh hhh hhhhhhhhhhhhhhh hhhhh hhhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhh hhhhh hhhhhhhdddmmdscnlasjbvkaghfahgbSKJVJBPAVFAPENMCM       E RGE GREGA EG     AERG EAGAETHG',
+    text: 'I have some experience of visual basic when i was a scholar. It was in 2000.',
     image: 'https://img.icons8.com/nolan/64/visual-basic.png'
   },
   {
     id: '6',
     header: 'C ++',
-    text: '3 years of expirience. 10 different projects on Github and one commercial project ljahhf hh hhh hhhhhhhhhhhhhhh hhhhh hhhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhh hhhhh hhhhhhhdddmmdscnlasjbvkaghfahgbSKJVJBPAVFAPENMCM       E RGE GREGA EG     AERG EAGAETHG',
+    text: 'I suppose that this language is quite difficult, so i have no plan to touch it.',
     image: 'https://img.icons8.com/nolan/64/c-plus-plus-logo.png'
   },
 ];
@@ -67,6 +66,35 @@ const Item = ({item}) => (
             </TextContainer>
           </ItemContainer>
 );
+
+
+
+const App = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
+        <FlatList
+        data={DATA}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Item item={item}></Item>
+        )}
+      />
+      </ScrollView>
+    </View>
+  );
+};
 
 const Header = styled.View`
     font-size: 18;
@@ -97,33 +125,6 @@ const TextContainer = styled.View`
     justify-content: center;
     flex: 6;
 `
-
-const App = () => {
-  const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <FlatList
-        data={DATA}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Item item={item}></Item>
-        )}
-      />
-      </ScrollView>
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
