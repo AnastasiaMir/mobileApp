@@ -62,7 +62,7 @@ const Item = ({item}) => (
             <Image source={item.image} style={styles.image}/>
             </ImageContainer>
             <TextContainer>
-            <Header>{item.header}</Header>
+            <Text style={styles.header}>{item.header}</Text>
             <Text style={styles.text}>{item.text}</Text>
             </TextContainer>
           </ItemContainer>
@@ -144,6 +144,10 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     maxWidth: '90%',
   },
+  header: {
+    fontSize: 18,
+    fontWeight:'bold',
+  }
   
 });
 
